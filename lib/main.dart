@@ -1,6 +1,6 @@
 import 'package:bloc_flutter/favorite_app/bloc/items_bloc.dart';
-import 'package:bloc_flutter/favorite_app/repo/item_repo.dart';
-import 'package:bloc_flutter/favorite_app/view/items_view.dart';
+import 'package:bloc_flutter/post_app/bloc/post_bloc.dart';
+import 'package:bloc_flutter/post_app/view/post_view.dart';
 import 'package:bloc_flutter/todo_app/bloc/todo_bloc.dart';
 import 'package:bloc_flutter/utils/image_picker_utils.dart';
 import 'package:bloc_flutter/counter/bloc/counter_bloc.dart';
@@ -25,12 +25,13 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CounterBloc()),
         BlocProvider(create: (context) => ImagePickerBloc(ImagePickerUtils())),
         BlocProvider(create: (context) => TodoBloc()),
-        BlocProvider(create: (context) => ItemsBloc(ItemRepo())),
+        BlocProvider(create: (context) => ItemsBloc()),
+        BlocProvider(create: (context) => PostBloc()),
       ],
       child: MaterialApp(
         title: 'Bloc Learning',
         theme: ThemeData(brightness: Brightness.dark),
-        home: const ItemsView(),
+        home: const PostView(),
       ),
     );
   }

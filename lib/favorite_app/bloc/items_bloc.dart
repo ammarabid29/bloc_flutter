@@ -5,8 +5,8 @@ import 'package:bloc_flutter/favorite_app/repo/item_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
-  final ItemRepo itemRepo;
-  ItemsBloc(this.itemRepo) : super(const ItemsState()) {
+  final ItemRepo itemRepo = ItemRepo();
+  ItemsBloc() : super(const ItemsState()) {
     on<FetchItemsListEvent>(fetchItemsList);
     on<AddFavoriteEvent>(_addFavorite);
     on<SelectItemEvent>(_selectItem);
