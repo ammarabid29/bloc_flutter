@@ -1,9 +1,8 @@
+import 'package:bloc_flutter/counter/view/counter_view.dart';
 import 'package:bloc_flutter/favorite_app/bloc/items_bloc.dart';
 import 'package:bloc_flutter/post_app/bloc/post_bloc.dart';
-import 'package:bloc_flutter/post_app/view/post_view.dart';
 import 'package:bloc_flutter/todo_app/bloc/todo_bloc.dart';
 import 'package:bloc_flutter/utils/image_picker_utils.dart';
-import 'package:bloc_flutter/counter/bloc/counter_bloc.dart';
 import 'package:bloc_flutter/image_picker/bloc/image_picker_bloc.dart';
 import 'package:bloc_flutter/switch_app/bloc/switch_bloc.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +21,6 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => SwitchBloc()),
-        BlocProvider(create: (context) => CounterBloc()),
         BlocProvider(create: (context) => ImagePickerBloc(ImagePickerUtils())),
         BlocProvider(create: (context) => TodoBloc()),
         BlocProvider(create: (context) => ItemsBloc()),
@@ -31,7 +29,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Bloc Learning',
         theme: ThemeData(brightness: Brightness.dark),
-        home: const PostView(),
+        home: const CounterView(),
       ),
     );
   }
