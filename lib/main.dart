@@ -1,4 +1,4 @@
-import 'package:bloc_flutter/counter/view/counter_view.dart';
+import 'package:bloc_flutter/auth/login/view/login_view.dart';
 import 'package:bloc_flutter/favorite_app/bloc/items_bloc.dart';
 import 'package:bloc_flutter/post_app/bloc/post_bloc.dart';
 import 'package:bloc_flutter/todo_app/bloc/todo_bloc.dart';
@@ -26,11 +26,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ItemsBloc()),
         BlocProvider(create: (context) => PostBloc()),
       ],
-      child: MaterialApp(
-        title: 'Bloc Learning',
-        theme: ThemeData(brightness: Brightness.dark),
-        home: const CounterView(),
-      ),
+      child: MaterialApp(title: 'Bloc Learning', home: const LoginView()),
     );
   }
 }
