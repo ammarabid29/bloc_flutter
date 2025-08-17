@@ -7,9 +7,13 @@ sealed class PostEvent extends Equatable {
   List<Object?> get props => [];
 }
 
-class PostFetched extends PostEvent {
-  const PostFetched();
+class PostFetchedEvent extends PostEvent {}
+
+class SearchPostEvent extends PostEvent {
+  final String searchKey;
+
+  const SearchPostEvent(this.searchKey);
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [searchKey];
 }

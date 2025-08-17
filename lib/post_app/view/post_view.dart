@@ -16,7 +16,7 @@ class _PostViewState extends State<PostView> {
   @override
   void initState() {
     super.initState();
-    context.read<PostBloc>().add(PostFetched());
+    context.read<PostBloc>().add(PostFetchedEvent());
   }
 
   @override
@@ -25,19 +25,37 @@ class _PostViewState extends State<PostView> {
       appBar: AppBar(title: Text("Post View")),
       body: BlocBuilder<PostBloc, PostState>(
         builder: (context, state) {
+          final isSearching = state.isSearching;
+          final postsToShow = isSearching ? state.filteredPosts : state.posts;
+
           switch (state.status) {
             case PostStatus.loading:
               return Center(child: CircularProgressIndicator());
             case PostStatus.success:
-              return ListView.builder(
-                itemCount: state.posts.length,
-                itemBuilder: (context, index) {
-                  final post = state.posts[index];
-                  return ListTile(
-                    title: Text(post.email),
-                    subtitle: Text(post.body),
-                  );
-                },
+              return Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Search in Posts',
+                      border: OutlineInputBorder(),
+                    ),
+                    onChanged: (searchKey) {
+                      context.read<PostBloc>().add(SearchPostEvent(searchKey));
+                    },
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: postsToShow.length,
+                      itemBuilder: (context, index) {
+                        final post = postsToShow[index];
+                        return ListTile(
+                          title: Text(post.email),
+                          subtitle: Text(post.body),
+                        );
+                      },
+                    ),
+                  ),
+                ],
               );
             case PostStatus.failure:
               return Center(child: Text(state.message));
